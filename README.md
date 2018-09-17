@@ -17,7 +17,7 @@ Get-SWNode
 Get-SWApp
 Get-SWNodeDuplicate
 Get-SWGroup
-AddPoller
+Add-SWPoller
 Test-SWNode
 Get-SWProblemNode
 Get-SWNodeCustomProperties

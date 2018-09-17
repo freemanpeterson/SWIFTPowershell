@@ -18,6 +18,7 @@ $DefaultCredentialName = $AppConfig.DefaultCredentialName.Value # Enter here the
 
 # Misc
 $AllowDuplicates       = $AppConfig.AllowDuplicates.Value       # Allows non-unique hostnames
+$TimeZone = (get-timezone).id;                                  # Get time zone from system
 
 # Mail Configuration
 $SNMPTo                = $AppConfig.SNMPTo.Value                # Mail To:
@@ -188,7 +189,10 @@ function Get-SWGroup {
 #.EXAMPLE
 #None
 #
-function AddPoller($PollerType) {
+function Add-SWPoller{
+    Params(
+        $PollerType
+        ) 
     $poller["PollerType"] = $PollerType
     $pollerUri = New-SwisObject $swis -EntityType "Orion.Pollers" -Properties $poller
 }
@@ -586,9 +590,9 @@ $Password = $Credentials.GetNetworkCredential().Password
         else {
             Write-Host "$( $Node.DNS ) ($( $Node.IP_Address ))  unmuted" -ForegroundColor Yellow
         }
-         $cstzone = [System.TimeZoneInfo]::FindSystemTimeZoneById("Central Standard Time")    
-         $StartTime=[System.TimeZoneInfo]::ConvertTimeFromUtc($Muted.SuppressFrom, $cstzone )
-         $EndTime=[System.TimeZoneInfo]::ConvertTimeFromUtc($Muted.SuppressUntil, $cstzone )
+         $myzone = [System.TimeZoneInfo]::FindSystemTimeZoneById($TimeZone)    
+         $StartTime=[System.TimeZoneInfo]::ConvertTimeFromUtc($Muted.SuppressFrom, $myZone )
+         $EndTime=[System.TimeZoneInfo]::ConvertTimeFromUtc($Muted.SuppressUntil, $myZone )
          "Schedule: " + $StartTime + "-" + $EndTime
     
     }
