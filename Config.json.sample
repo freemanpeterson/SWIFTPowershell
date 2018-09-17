@@ -1,0 +1,67 @@
+{
+    AppConfig:{
+        "VerboseLevel": {
+            "Description": "1=Recommended, 2=Informational, 3=Debug - Increase value if troubleshooting",
+            "Value": 1
+        },
+
+        "TestMode": {
+            "Description": "Changes email group",
+            "Value":false
+        },
+
+        "TestModeAdmin": {
+            "Description": "Test emails will go to this person only if test mode is turned on.",
+            "Value": "yourname@somewhere.com"
+        },
+
+        "AllowDuplicates": {
+            "Description": "Allows non-unique hostnames",
+            "Value":false
+        },
+
+        "HostName": {
+            "Description": "Used for SWISPowershell",
+            "Value": "localhost"
+        },
+
+        "PWFileDirectory": {
+            "Description": "Path where cached passwords will be stored",
+            "Value": "C:\\scripts\\"
+        },
+
+
+        "MuteLogging": {
+            "Description":  "Mute Logging on/off",
+            "Value":true
+        },
+
+        "SNMPTo": {
+            "Description":  "Mail To:,
+            "Value": ["yourname@somewhere.com, "yourname2@somewhere.com"]
+        },
+
+        "SNMPFrom": {
+            "Description":  "Mail From:",
+            "Value": "yourname@somewhere.com,"
+        },
+
+        "SNMPServer": {
+            "Description":  "Mail Server",
+            "Value": "relay.somewhere.com,"
+        },
+
+        "DefaultFileType": {
+            "Description":  "Options: csv,html, and text",
+            "Value": "csv"
+        },
+
+        "DefaultCredentialName": {
+            "Description":  "Enter here the name under which the WMI credentials are stored.",
+            "Value": "WindowsUserAccount"
+        }
+   },
+   "CachePassword": ["testuser1",
+                        "testuser2" 
+                    ]
+}
