@@ -10,7 +10,7 @@ Install instructions:
 1) copy config.json.sample to config.json
 2) edit config.json as needed
 ````
-
+,,,
 Cmdlets Included:
 Get-SWVar
 Set-SWPassword
@@ -32,6 +32,7 @@ Set-SWGroupMute
 Get-SWGroupMute
 Set-SWGroupMuteSchedule
 Get-SWNodeMuteSchedule
+,,,
 
 Terms of use: 
 You are free to use aslong as you send me a email freemanpeterson@gmail.com
