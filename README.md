@@ -1,14 +1,15 @@
-#####################################################################################################
-# Program:            ITDSolarWinds.psm1
-# Installation Path:  C:\Program Files\WindowsPowerShell\Modules\ITDSolarWinds
-# Written by:         Freeman Peterson fjpeterson@nd.gov
-# Notes:              Most of the script functionaly depends on FQDN as ComputerName.
-#                     Example: Computer.Domain.Com
-#####################################################################################################
 
+# Program:            ITDSolarWinds.psm1
+## Installation Path:  C:\Program Files\WindowsPowerShell\Modules\ITDSolarWinds
+### Written by:         Freeman Peterson fjpeterson@nd.gov
+#### Notes:              Most of the script functionaly depends on FQDN as ComputerName.
+####                     Example: Computer.Domain.Com
+
+```
 Install instructions:
 1) copy config.json.sample to config.json
 2) edit config.json as needed
+````
 
 Cmdlets Included:
 Get-SWVar
