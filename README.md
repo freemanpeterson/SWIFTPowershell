@@ -1,6 +1,6 @@
 
-# Program:            ITDSolarWinds.psm1
-## Installation Path:  C:\Program Files\WindowsPowerShell\Modules\ITDSolarWinds
+# Program:            SWIFTPowershell.psm1
+## Installation Path:  C:\Program Files\WindowsPowerShell\Modules\SWIFTPowershell
 ### Written by:         Freeman Peterson fjpeterson@nd.gov
 #### Notes:              Most of the script functionaly depends on FQDN as ComputerName.
 ####                     Example: Computer.Domain.Com
