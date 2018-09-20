@@ -5,6 +5,12 @@
 #### Notes:              Most of the script functionaly depends on FQDN as ComputerName.
 ####                     Example: Computer.Domain.Com
 
+This module is not part of SolarWinds TradeMark.
+This requires SWISPowershell to be installed.
+
+This module is designed to make system administration easier. I plan to add in functionality as time goes on(Stay Tuned!)
+
+
 ```
 Install instructions:
 1) copy config.json.sample to config.json
@@ -35,4 +41,4 @@ Get-SWNodeMuteSchedule
 ```
 
 Terms of use: 
-You are free to use aslong as you send me a email freemanpeterson@gmail.com
+You are free if you send me a email freemanpeterson@gmail.com
