@@ -1,7 +1,6 @@
 
 # SWIFTPowershell
-### Written by:         Freeman Peterson fjpeterson@nd.gov
-#### 
+#### Written by:         Freeman Peterson fjpeterson@nd.gov
 
 The common module "SWISPowershell" is a good module and resource frendly. However, sometimes it just not as easy as running a simple cmdlet. This module is designed to make system administration easier. 
 I plan to add functionality as time goes on. (Stay Tuned!)
