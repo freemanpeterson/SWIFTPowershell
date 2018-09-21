@@ -13,6 +13,7 @@ I plan to add in functionality as time goes on. (Stay Tuned!)
 
 Install instructions:
 + Install git (https://git-scm.com/download/win)
++ Install SWISPowerShell (https://www.powershellgallery.com/packages/SwisPowerShell/2.3.0.108)
 
 Install SWIFTPowershell:
 ```
