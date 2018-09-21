@@ -13,7 +13,7 @@ I plan to add in functionality as time goes on(Stay Tuned!)
 
 
 
-#Install instructions:
+Install instructions:
 ```
 Install git
 cd "c:\Program Files\WindowsPowershell\Modules\"
