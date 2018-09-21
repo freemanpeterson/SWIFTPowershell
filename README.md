@@ -41,4 +41,8 @@ Get-SWNodeMuteSchedule
 ```
 
 Terms of use: 
-You are free if you send me a email freemanpeterson@gmail.com
+It is free if you send me a email freemanpeterson@gmail.com. Subject must be "SWIFTPowershell Install".
+If you have questions email me with the subject "SWIFTPowershell Question"
+If you have some advice send me a email with the subject "SWIFTPowershell Advice"
+
+Have fun!
