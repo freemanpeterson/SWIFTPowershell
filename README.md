@@ -3,8 +3,6 @@
 ### Written by:         Freeman Peterson fjpeterson@nd.gov
 #### 
 
-+ This module is not part of SWIFT or SolarWinds TradeMark
-
 SWISPowershell is a good module and resource frendly. However, sometimes it just not as easy as running a simple cmdlet unlike most of standard powershell modules. This module is designed to make system administration easier. 
 I plan to add in functionality as time goes on. (Stay Tuned!)
 
@@ -62,3 +60,5 @@ If you have a question mail with subject "SWIFTPowershell Question"
 If you have a request mail with subject "SWIFTPowershell Request"
 ```
 Have fun!
+
++ This module is not part of SWIFT or SolarWinds TradeMark
