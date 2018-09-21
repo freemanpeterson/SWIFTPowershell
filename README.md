@@ -1,5 +1,5 @@
 
-# Program:            SWIFTPowershell
+# SWIFTPowershell
 ### Written by:         Freeman Peterson fjpeterson@nd.gov
 #### Functionality depends on you setting FQDN (Example: Computer.Domain.Com) for each node. 
 You may use Set-SWDNS to make your environment complaint. 
