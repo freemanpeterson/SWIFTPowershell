@@ -1,8 +1,8 @@
 
 # Program:            SWIFTPowershell
 ### Written by:         Freeman Peterson fjpeterson@nd.gov
-### Installation Path:  C:\Program Files\WindowsPowerShell\Modules\SWIFTPowershell
-#### Notes:              Most of the script functionaly depends on FQDN as ComputerName.
+#### Notes:              Majority of functionality depends on you setting FQDN. 
+###                      You may use Set-SWDNS to make your environment complaint
 ####                     Example: Computer.Domain.Com
 
 This module is not part of SWIFT or SolarWinds TradeMark.
@@ -42,6 +42,11 @@ Get-SWGroupMute
 Set-SWGroupMuteSchedule
 Get-SWNodeMuteSchedule
 ```
+```
+Get examples by preforming help on each cmdlet:
+Get-help Set-SWDNS -examples
+
+
 ```
 Terms of use: 
 It is free if you send me an email freemanpeterson@gmail.com. Subject must be "SWIFTPowershell Install".
