@@ -53,6 +53,6 @@ If you are downloading mail with subject "SWIFTPowershell Install".
 
 Support:
 If you have a questions mail with subject "SWIFTPowershell Question"
-If you have a request eail with subject "SWIFTPowershell Request"
+If you have a request mail with subject "SWIFTPowershell Request"
 ````
 Have fun!
