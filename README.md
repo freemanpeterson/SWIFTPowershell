@@ -46,7 +46,7 @@ Set-SWGroupMuteSchedule
 Get-SWNodeMuteSchedule
 ```
 ```
-How to get examples of each cmdlet:
+How to get examples and description of each cmdlet:
 Get-help Set-SWDNS -examples
 ```
 
