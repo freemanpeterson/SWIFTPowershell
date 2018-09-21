@@ -12,7 +12,7 @@ Prerequisites:
 + This module depends on you setting FQDN (Example: Computer.Domain.Com) for each node. 
   - You may use Set-SWDNS to make your environment complaint. 
 
-Install SWIFTPowershell:
+Install
 ```
 cd "c:\Program Files\WindowsPowershell\Modules\"
 git clone https://github.com/freemanpeterson/SWIFTPowershell.git
@@ -21,7 +21,7 @@ copy config.json.sample config.json
 # Edit as needed
 ise config.json 
 ````
-Cmdlets Included:
+Cmdlets
 ```
 Get-SWVar
 Set-SWPassword
