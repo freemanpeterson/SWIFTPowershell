@@ -596,4 +596,114 @@ $Password = $Credentials.GetNetworkCredential().Password
          "Schedule: " + $StartTime + "-" + $EndTime
     
     }
+
+
+#
+#.SYNOPSIS
+# Adds SolarWinds Group 
+#
+#.EXAMPLE
+# Add-SWGroup -Group mygroup 
+# Add-SWGroup -Group mygroup2 -RootGroup mygroup
+#
+Function Add-SWGroup {
+    Param(
+        [Parameter(Mandatory=$True)]
+        [string]$Group,
+        [string]$RootGroup
+    )
+
+    if ($RootGroup) {
+        Write-Information ("The name of this function is: {0} " -f $MyInvocation.MyCommand) 
+        $rootgroupId=(Get-SWgroup|Where-Object {$_.Name -eq $RootGroup}).ContainerID
+
+        #
+        # ADDING A GROUP
+        #
+        # Adding up devices in the group.
+        #  
+
+        $groupmembers = @()
+
+            $groupId = (Invoke-SwisVerb $swis "Orion.Container" "CreateContainer" @(
+            # Group name 
+            "$Group",
+
+            # owner, must be 'Core'
+            "Core",
+
+            # refresh frequency
+            60,
+
+            # Status rollup mode:
+            # 0 = Mixed status shows warning
+            # 1 = Show worst status
+            # 2 = Show best status
+            0,
+
+            # group description
+            "Sub Group created by the PowerShell script.",
+
+            # polling enabled/disabled = true/false (in lowercase)
+            "true",
+
+            # group members
+            ([xml]@(
+                "<ArrayOfMemberDefinitionInfo xmlns='http://schemas.solarwinds.com/2008/Orion'>",
+                [string]($groupmembers |% {
+                "<MemberDefinitionInfo><Name>$($_.Name)</Name><Definition>$($_.Definition)</Definition></MemberDefinitionInfo>"
+                }
+            ),
+            "</ArrayOfMemberDefinitionInfo>"
+            )).DocumentElement
+        )).InnerText 
+
+     # Add the SubGroup to a group
+
+        $groupUri = Get-SwisData $swis "SELECT Uri FROM Orion.Container WHERE ContainerID=@id" @{ id = $groupId }
+
+        Invoke-SwisVerb $swis "Orion.Container" "AddDefinition" @(
+	        # group ID
+	        $rootgroupId,
+
+	        # group member to add
+	        ([xml]"
+		        <MemberDefinitionInfo xmlns='http://schemas.solarwinds.com/2008/Orion'>
+		            <Name></Name>
+		            <Definition>$groupUri</Definition>
+	            </MemberDefinitionInfo>"
+ 	        ).DocumentElement
+        ) | Out-Null
+     }
+     else {
+     $members = @()
+        $groupId = (Invoke-SwisVerb $swis "Orion.Container" "CreateContainer" @(    
+        # group name    
+        "$Group",    
+        # owner, must be 'Core'    
+        "Core",    
+        # refresh frequency    
+        60,    
+        # Status rollup mode:    
+        # 0 = Mixed status shows warning    
+        # 1 = Show worst status    
+        # 2 = Show best status    
+        0,    
+        # group description    
+        "Group created by the PowerShell sample script.",    
+        # polling enabled/disabled = true/false (in lowercase)    
+        "true",    
+        # group members    
+        ([xml]@(    
+            "<ArrayOfMemberDefinitionInfo xmlns='http://schemas.solarwinds.com/2008/Orion'>",    
+            [string]($members |% {    
+            "<MemberDefinitionInfo><Name>$($_.Name)</Name><Definition>$($_.Definition)</Definition></MemberDefinitionInfo>"    
+            }    
+        ),    
+        "</ArrayOfMemberDefinitionInfo>"    
+            )).DocumentElement    
+        )).InnerText    
+     } 
+}
+
 }
