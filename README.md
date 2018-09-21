@@ -3,7 +3,7 @@
 ### Written by:         Freeman Peterson fjpeterson@nd.gov
 #### 
 
-SWISPowershell is a good module and resource frendly. However, sometimes it just not as easy as running a simple cmdlet unlike most of standard powershell modules. This module is designed to make system administration easier. 
+SWISPowershell is a good module and resource frendly. However, sometimes it just not as easy as running a simple cmdlet. This module is designed to make system administration easier. 
 I plan to add in functionality as time goes on. (Stay Tuned!)
 
 Prerequisites:
