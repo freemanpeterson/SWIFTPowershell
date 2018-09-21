@@ -63,4 +63,4 @@ Support
 If you have a question mail with subject "SWIFTPowershell Support"
 ```
 Legal
-+ This module is not affiliate with *SWIFT* ™ or *SolarWinds*™ 
++ This module is not affiliated with *SWIFT* ™ or *SolarWinds*™ 
