@@ -48,8 +48,10 @@ Get-help Set-SWDNS -examples
 
 ```
 Terms of use: 
-It is free if you send me an email freemanpeterson@gmail.com. Subject must be "SWIFTPowershell Install".
-If you have a questions mail with the subject "SWIFTPowershell Question"
-If you have a request eail with the subject "SWIFTPowershell Request"
+It is free if you send me an email freemanpeterson@gmail.com. 
+If you are downloading mail with subject "SWIFTPowershell Install".
+
+If you have a questions mail with subject "SWIFTPowershell Question"
+If you have a request eail with subject "SWIFTPowershell Request"
 ````
 Have fun!
