@@ -26,7 +26,6 @@ ise config.json
 ````
 Cmdlets Included:
 ```
-
 Get-SWVar
 Set-SWPassword
 Get-SWNode
@@ -48,8 +47,10 @@ Get-SWGroupMute
 Set-SWGroupMuteSchedule
 Get-SWNodeMuteSchedule
 ```
-```
+
+
 How to get examples and description of each cmdlet:
+```
 Get-help Set-SWDNS -examples
 ```
 
