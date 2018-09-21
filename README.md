@@ -46,7 +46,7 @@ Get-SWNodeMuteSchedule
 ```
 How to get examples and description of each cmdlet:
 ```
-Get-help Set-SWDNS -examples
+Get-Help Set-SWDNS -Examples
 ```
 
 Terms of use: 
