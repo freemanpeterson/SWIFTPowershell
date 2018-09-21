@@ -10,7 +10,7 @@ Prerequisites:
 + Install git (https://git-scm.com/download/win)
 + Install SWISPowerShell (https://www.powershellgallery.com/packages/SwisPowerShell/2.3.0.108)
 + This module depends on you setting FQDN (Example: Computer.Domain.Com) for each node. 
-* You may use Set-SWDNS to make your environment complaint. 
+- You may use Set-SWDNS to make your environment complaint. 
 
 Install SWIFTPowershell:
 ```
