@@ -1,5 +1,5 @@
 
-# Program:            SWIFTPowershell.psm1
+# Program:            SWIFTPowershell
 ### Written by:         Freeman Peterson fjpeterson@nd.gov
 ### Installation Path:  C:\Program Files\WindowsPowerShell\Modules\SWIFTPowershell
 #### Notes:              Most of the script functionaly depends on FQDN as ComputerName.
