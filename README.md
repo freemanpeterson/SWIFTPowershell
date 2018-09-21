@@ -12,8 +12,9 @@ SWISPowershell is a good module and resource frendly. However, sometimes it just
 I plan to add in functionality as time goes on(Stay Tuned!)
 
 
+
+#Install instructions:
 ```
-Install instructions:
 Install git
 cd "c:\Program Files\WindowsPowershell\Modules\"
 git clone https://github.com/freemanpeterson/SWIFTPowershell.git
