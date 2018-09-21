@@ -44,19 +44,19 @@ Get-SWGroupMute
 Set-SWGroupMuteSchedule
 Get-SWNodeMuteSchedule
 ```
-How to get examples and description of each cmdlet:
+How to get examples and description of each cmdlet
 ```
 Get-Help Set-SWDNS -Examples
 ```
 
-Terms of use: 
+Terms of use
 ```
 It is free if you send me an email freemanpeterson@gmail.com. 
 If you are downloading mail with subject "SWIFTPowershell Install".
 ```
-Support:
+Support
 ```
 If you have a question mail with subject "SWIFTPowershell Support"
 ```
-Legal:
+Legal
 + This module is not part of SWIFT or SolarWinds TradeMark
