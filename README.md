@@ -15,7 +15,6 @@ Prerequisites:
 
 Install SWIFTPowershell:
 ```
-Install git
 cd "c:\Program Files\WindowsPowershell\Modules\"
 git clone https://github.com/freemanpeterson/SWIFTPowershell.git
 cd SWIFTPowershell
