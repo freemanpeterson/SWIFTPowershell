@@ -54,7 +54,7 @@ It is free if you send me an email freemanpeterson@gmail.com.
 If you are downloading mail with subject "SWIFTPowershell Install".
 
 Support:
-If you have a questions mail with subject "SWIFTPowershell Question"
+If you have a question mail with subject "SWIFTPowershell Question"
 If you have a request mail with subject "SWIFTPowershell Request"
 ````
 Have fun!
