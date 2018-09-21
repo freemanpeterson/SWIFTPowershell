@@ -9,7 +9,7 @@ You may use Set-SWDNS to make your environment complaint.
 + This module is not part of SWIFT or SolarWinds TradeMark
 
 SWISPowershell is a good module and resource frendly. However, sometimes it just not as easy as running a simple cmdlet unlike most of standard powershell modules. This module is designed to make system administration easier. 
-I plan to add in functionality as time goes on(Stay Tuned!)
+I plan to add in functionality as time goes on. (Stay Tuned!)
 
 Install instructions:
 + Install git (https://git-scm.com/download/win)
