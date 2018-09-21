@@ -24,8 +24,9 @@ copy config.json.sample config.json
 # Edit as needed
 ise config.json 
 ````
-```
 Cmdlets Included:
+```
+
 Get-SWVar
 Set-SWPassword
 Get-SWNode
