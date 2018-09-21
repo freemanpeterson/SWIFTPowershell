@@ -14,6 +14,10 @@ I plan to add in functionality as time goes on(Stay Tuned!)
 
 
 Install instructions:
+Install git
++ https://git-scm.com/download/win
+
+Install SWIFTPowershell:
 ```
 Install git
 cd "c:\Program Files\WindowsPowershell\Modules\"
