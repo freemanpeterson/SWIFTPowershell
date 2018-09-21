@@ -53,13 +53,14 @@ How to get examples and description of each cmdlet:
 Get-help Set-SWDNS -examples
 ```
 
-```
 Terms of use: 
+```
 It is free if you send me an email freemanpeterson@gmail.com. 
 If you are downloading mail with subject "SWIFTPowershell Install".
-
+```
 Support:
+```
 If you have a question mail with subject "SWIFTPowershell Question"
 If you have a request mail with subject "SWIFTPowershell Request"
-````
+```
 Have fun!
