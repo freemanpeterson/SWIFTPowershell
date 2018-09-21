@@ -26,7 +26,7 @@ Edit Configuration
 ```
 ise config.json 
 ````
-Cmdlets
+Available Cmdlets
 ```
 Get-SWVar
 Set-SWPassword
