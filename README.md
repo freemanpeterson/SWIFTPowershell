@@ -17,7 +17,7 @@ Install git
 cd "c:\Program Files\WindowsPowershell\Modules\"
 git clone https://github.com/freemanpeterson/SWIFTPowershell.git
 copy config.json.sample config.json
-edit config.json as needed
+ise config.json - Edit as needed
 ````
 ```
 Cmdlets Included:
