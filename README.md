@@ -5,7 +5,7 @@
 #### Notes:              Most of the script functionaly depends on FQDN as ComputerName.
 ####                     Example: Computer.Domain.Com
 
-This module is not part of SolarWinds TradeMark.
+This module is not part of SWIFT or SolarWinds TradeMark.
 This requires SWISPowershell to be installed.
 
 This module is designed to make system administration easier. I plan to add in functionality as time goes on(Stay Tuned!)
