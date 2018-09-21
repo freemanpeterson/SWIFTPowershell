@@ -56,8 +56,7 @@ If you are downloading mail with subject "SWIFTPowershell Install".
 ```
 Support:
 ```
-If you have a question mail with subject "SWIFTPowershell Question"
-If you have a request mail with subject "SWIFTPowershell Request"
+If you have a question mail with subject "SWIFTPowershell Support"
 ```
 Legal:
 + This module is not part of SWIFT or SolarWinds TradeMark
