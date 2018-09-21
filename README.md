@@ -11,7 +11,7 @@ You may use Set-SWDNS to make your environment complaint.
 SWISPowershell is a good module and resource frendly. However, sometimes it just not as easy as running a simple cmdlet unlike most of standard powershell modules. This module is designed to make system administration easier. 
 I plan to add in functionality as time goes on. (Stay Tuned!)
 
-Install instructions:
+Prerequisites:
 + Install git (https://git-scm.com/download/win)
 + Install SWISPowerShell (https://www.powershellgallery.com/packages/SwisPowerShell/2.3.0.108)
 
@@ -48,8 +48,6 @@ Get-SWGroupMute
 Set-SWGroupMuteSchedule
 Get-SWNodeMuteSchedule
 ```
-
-
 How to get examples and description of each cmdlet:
 ```
 Get-help Set-SWDNS -examples
