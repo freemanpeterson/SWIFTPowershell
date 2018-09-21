@@ -1,7 +1,7 @@
 
 # Program:            SWIFTPowershell
 ### Written by:         Freeman Peterson fjpeterson@nd.gov
-#### Notes:              Majority of functionality depends on you setting FQDN(Example: Computer.Domain.Com). 
+#### Notes:              Functionality depends on you setting FQDN(Example: Computer.Domain.Com) for each node. 
 ####                      You may use Set-SWDNS to make your environment complaint. 
 
 This module is not part of SWIFT or SolarWinds TradeMark.
