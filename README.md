@@ -45,6 +45,7 @@ Set-SWNodeCustomProperty
 Set-SWPassword
 Test-SWNode
 Update-SWDNS
+Remove-SWNode
 ```
 How to get examples and description of each cmdlet:
 ```

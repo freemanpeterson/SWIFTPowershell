@@ -170,6 +170,22 @@ function Get-SWNodeDuplicate {
     $table    
 }
 
+
+#
+#.SYNOPSIS
+# Remove-SWNode
+#
+#.EXAMPLE
+# Remove-SWNode -ComputerName Computer.Example.com
+#
+Function Remove-SWNode {
+    Param (
+    [Parameter(Mandatory=$True)]
+        $ComputerName
+    )
+    Remove-SWISObject $swis -Uri (Get-SWnode|where {$_.DNS -eq $ComputerName}).URI
+}
+
 #
 #.SYNOPSIS
 # Gets SolarWinds groups.
