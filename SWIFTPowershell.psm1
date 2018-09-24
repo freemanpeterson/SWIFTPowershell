@@ -189,7 +189,7 @@ function Get-SWGroup {
 # Add-SWWinNode
 #
 Function Add-SWWinNode {
-    Parm (
+    Param (
         [Parameter(Mandatory=$True)]
         $ComputerName,
         $credentialName=$DefaultcredentialName # Enter here the name under which the WMI credentials are stored. You can find it in the "Manage Windows Credentials" section of the Orion website (Settings)

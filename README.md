@@ -23,6 +23,7 @@ ise config.json
 ````
 Cmdlets Included:
 ```
+Add-SWWinNode
 Add-SWGroup
 Add-SWPoller
 Get-SWApp
