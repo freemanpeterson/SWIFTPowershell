@@ -46,6 +46,7 @@ Set-SWPassword
 Test-SWNode
 Update-SWDNS
 Remove-SWNode
+Set-SWAppMute
 ```
 How to get examples and description of each cmdlet:
 ```

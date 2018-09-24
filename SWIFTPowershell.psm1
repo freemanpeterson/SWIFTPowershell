@@ -556,6 +556,23 @@ function Set-SWDNSList {
     }
 }
 
+#.SYNOPSIS
+# Set Mute status on template 
+#.EXAMPLE
+# Set-SWAppMute -App mytemplate -minutes 10
+#
+Function Set-SWAppMute {
+    Param (
+        $Minutes="1",
+        [Parameter(Mandatory=$True)]
+        $APP
+        
+    )
+    $Uri=(get-swapp|where {$_.Name -eq $APP}).URI
+    $Results = Invoke-SwisVerb -SwisConnection $Swis -EntityName Orion.AlertSuppression -Verb SuppressAlerts -Arguments @( @( $Uri ), ( Get-Date ).ToUniversalTime(),  ( ( Get-Date ).AddMinutes($MuteMinutes) ).ToUniversalTime() )
+    $Results
+}
+
 #
 #.SYNOPSIS
 # Set Group Mute status #
