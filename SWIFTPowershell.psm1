@@ -182,6 +182,129 @@ function Get-SWGroup {
     Get-SwisData -SwisConnection $swis -Query 'SELECT ContainerID,Name,URI FROM Orion.Container' 
 } 
 
+#.SYNOPSIS
+# Addes a Windows Node to SolarWinds, waits for pulling to complete and then tests the node for errors.
+#
+#.EXAMPLE
+# Add-SWWinNode
+#
+Function Add-SWWinNode {
+    Parm (
+        [Parameter(Mandatory=$True)]
+        $ComputerName,
+        $credentialName=$DefaultcredentialName # Enter here the name under which the WMI credentials are stored. You can find it in the "Manage Windows Credentials" section of the Orion website (Settings)
+    )
+     Write-Information ("The name of this function is: {0} " -f $MyInvocation.MyCommand) 
+
+    $ShortName=$ComputerName.Split('.')[0]
+    Write-Information ("ShortName: " +  $ShortName)
+
+    $InitalPollDelay ="360" #Allow enough time to poll before reporting an issue.
+                      
+
+     if ($AllowDuplicates -eq $False) {
+          $NodeId=(Get-SWNode|Where-Object {$_.Caption -eq $ShortName}).NodeID
+          
+         if ($NodeId) {
+         "Existing NodeId: " + $NodeId
+          "Caption already exist! Change AllowDuplicates value to `$true if you would like to override."
+          return
+         }
+     }
+     if ($AllowDuplicates -eq $False) {
+          $NodeId=(Get-SWNode|Where-Object {$_.DNS -eq $ComputerName}).NodeID
+         if ($NodeId) {
+         "Existing NodeId: " + $NodeId
+          "DNS already exist! Change AllowDuplicates value to `$true if you would like to override."
+          return
+         }
+     }
+
+    $swis = Connect-Swis -host $hostname -Credential $Credential
+    $ip=([System.Net.Dns]::gethostentry($ComputerName)|select AddressList).AddressList.IPAddressToString
+
+    
+    
+    # Node properties
+    $newNodeProps = @{
+        IPAddress = $ip
+        Caption=$ShortName
+        EngineID = 1
+        ObjectSubType = "WMI"
+        DynamicIP=$True 
+        DNS=$ComputerName
+        SysName = ""
+    }
+   
+    #Creating the node
+    $newNodeUri = New-SwisObject $swis -EntityType "Orion.Nodes" -Properties $newNodeProps
+    $nodeProps = Get-SwisObject $swis -Uri $newNodeUri 
+
+        Write-Verbose  ("Creating Node:") 
+        Write-Verbose  (" Caption: " + $ShortName)
+        Write-Verbose  (" NodeID: " + $nodeProps["NodeID"])
+        Write-Verbose  (" Ip: " + $ip)
+        Write-Verbose  (" DNS: " + $ComputerName)
+
+    #Getting the Credential ID
+    $credentialId = Get-SwisData $swis "SELECT ID FROM Orion.Credential where Name = '$credentialName'"
+    if (!$credentialId) {
+	    Throw "Can't find the Credential with the provided Credential name '$credentialName'."
+    }
+
+    #Adding NodeSettings
+    $nodeSettings = @{
+        NodeID = $nodeProps["NodeID"]
+        SettingName = "WMICredential"
+        SettingValue = ($credentialId.ToString())
+    }
+
+    #Creating node settings
+    $newNodeSettings = New-SwisObject $swis -EntityType "Orion.NodeSettings" -Properties $nodeSettings
+
+    # register specific pollers for the node
+    $poller = @{
+        NetObject = "N:" + $nodeProps["NodeID"]
+        NetObjectType = "N"
+        NetObjectID = $nodeProps["NodeID"]
+    }
+
+    #region Add Pollers for Status (Up/Down), Response Time, Details, Uptime, CPU, & Memory
+    # Status
+    $poller["PollerType"]="N.Status.ICMP.Native";
+    $pollerUri = New-SwisObject $swis -EntityType "Orion.Pollers" -Properties $poller
+
+    # Response time
+    $poller["PollerType"]="N.ResponseTime.ICMP.Native";
+    $pollerUri = New-SwisObject $swis -EntityType "Orion.Pollers" -Properties $poller
+
+    # Details
+    $poller["PollerType"]="N.Details.WMI.Vista";
+    $pollerUri = New-SwisObject $swis -EntityType "Orion.Pollers" -Properties $poller
+
+    # Uptime
+    $poller["PollerType"]="N.Uptime.WMI.XP";
+    $pollerUri = New-SwisObject $swis -EntityType "Orion.Pollers" -Properties $poller
+
+    # CPU
+    $poller["PollerType"]="N.Cpu.WMI.Windows";
+    $pollerUri = New-SwisObject $swis -EntityType "Orion.Pollers" -Properties $poller
+
+    # Memory
+    $poller["PollerType"]="N.Memory.WMI.Windows";
+    $pollerUri = New-SwisObject $swis -EntityType "Orion.Pollers" -Properties $poller 
+    #endregion Add Pollers for Status (Up/Down), Response Time, Details, Uptime, CPU, & Memory
+    
+    Write-Verbose  ("Waiting for poll to complete..." )
+    Start-Sleep -Seconds $InitalPollDelay
+
+    $Problem=Test-SWNode -ComputerName $ComputerName
+     
+    if ($Problem) {
+        Throw "Problem with $ComputerName nodeID:  " + $nodeProps["NodeID"]
+    }
+}
+
 #
 #.SYNOPSIS
 # Addes a puller for a node to SolarWinds
@@ -610,20 +733,33 @@ Function Add-SWGroup {
     Param(
         [Parameter(Mandatory=$True)]
         [string]$Group,
-        [string]$RootGroup
+        [string]$RootGroup,
+        $GroupMembers=@()
     )
-
+    
     if ($RootGroup) {
         Write-Information ("The name of this function is: {0} " -f $MyInvocation.MyCommand) 
-        $rootgroupId=(Get-SWgroup|Where-Object {$_.Name -eq $RootGroup}).ContainerID
+    
+    
+        $RootGroupId=(Get-SWgroup|Where-Object {$_.Name -eq "$RootGroup"}).ContainerID
 
+        if (-Not ($RootGroupId)) { 
+            Write-Verbose "Root Group $RootGroup does not exist"
+            return
+        }
+        
         #
         # ADDING A GROUP
         #
         # Adding up devices in the group.
         #  
+        $GroupId=(Get-SWgroup|Where-Object {$_.Name -eq "$Group"}).ContainerID
 
-        $groupmembers = @()
+        if ($GroupId) { 
+            Write-Verbose "Not adding Group. Group $Group already exist"
+            return
+        }
+        Write-Verbose  ("Creating Group $Group")
 
             $groupId = (Invoke-SwisVerb $swis "Orion.Container" "CreateContainer" @(
             # Group name 
@@ -676,7 +812,14 @@ Function Add-SWGroup {
         ) | Out-Null
      }
      else {
-     $members = @()
+
+        $RootGroupId=(Get-SWgroup|Where-Object {$_.Name -eq "$Group"}).ContainerID
+
+        if ($GroupId) { 
+            Write-Verbose "Not adding Group. Group $Group already exist"
+            return
+        }
+        Write-Verbose  ("Creating Group $Group")
         $groupId = (Invoke-SwisVerb $swis "Orion.Container" "CreateContainer" @(    
         # group name    
         "$Group",    
@@ -696,7 +839,7 @@ Function Add-SWGroup {
         # group members    
         ([xml]@(    
             "<ArrayOfMemberDefinitionInfo xmlns='http://schemas.solarwinds.com/2008/Orion'>",    
-            [string]($members |% {    
+            [string]($groupmembers |% {    
             "<MemberDefinitionInfo><Name>$($_.Name)</Name><Definition>$($_.Definition)</Definition></MemberDefinitionInfo>"    
             }    
         ),    
