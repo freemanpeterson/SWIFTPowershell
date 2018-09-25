@@ -494,7 +494,7 @@ function Send-MailPSObject {
 
 #
 #.SYNOPSIS
-# Sets the DNS name.
+# Sets the DNS name it uses the shortname as the caption
 #
 #.EXAMPLE
 # Set-SWDNS -ComputerName Computer.Domain.Com
@@ -519,6 +519,12 @@ function Set-SWDNS {
         }
 }
 
+#.SYNOPSIS
+# Updates the DNS name if diffrent then caption
+#
+#.EXAMPLE
+# Update-SWDNS -ComputerName Caption -DNS Computer.Domain.Com
+#
 function Update-SWDNS {
     Param (
         [Parameter(Mandatory=$True)]
@@ -543,6 +549,11 @@ function Update-SWDNS {
      }
 }
 
+#.SYNOPSIS
+# Sets the DNS name it uses the shortname as the caption for a list of systems
+#.EXAMPLE
+# Set-SWDNSList -File "/tmp/dns.txt"
+#
 function Set-SWDNSList {
     Param(
         [Parameter(Mandatory=$True)]
