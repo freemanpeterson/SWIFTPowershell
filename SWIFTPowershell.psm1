@@ -756,28 +756,40 @@ $Password = $Credentials.GetNetworkCredential().Password
 
 #
 #.SYNOPSIS
-# Adds SolarWinds Group 
-#
+#Adds SolarWinds Group 
+#Option: 
+#RollupMode 
+#        0 = Mixed status shows warning
+#        1 = Show worst status
+#        2 = Show best status
+#RefreshFrequency
+#        - Needs to be set greater then 60 or it will default to 60.      
 #.EXAMPLE
 # Add-SWGroup -Group mygroup 
-# Add-SWGroup -Group mygroup2 -RootGroup mygroup
-#
+#.EXAMPLE
+# Add-SWGroup -Group mygroup2 -Parent mygroup
+#.EXAMPLE
+# Add-SWGroup -Group mygroup2 -Parent mygroup -RefreshFrequency 60 -RollupMode 0 -Description "My second group" -Pulling true
 Function Add-SWGroup {
     Param(
         [Parameter(Mandatory=$True)]
         [string]$Group,
-        [string]$RootGroup,
+        [string]$Parent,
+        [int]$RefreshFrequency=60,
+        [int]$RollupMode=0,
+        [string]$Description="Group created by the PowerShell script.",
+        [string]$Pulling="true",
         $GroupMembers=@()
     )
     
-    if ($RootGroup) {
+    if ($Parent) {
         Write-Information ("The name of this function is: {0} " -f $MyInvocation.MyCommand) 
     
     
-        $RootGroupId=(Get-SWgroup|Where-Object {$_.Name -eq "$RootGroup"}).ContainerID
+        $ParentId=(Get-SWgroup|Where-Object {$_.Name -eq "$Parent"}).ContainerID
 
-        if (-Not ($RootGroupId)) { 
-            Write-Verbose "Root Group $RootGroup does not exist"
+        if (-Not ($ParentId)) { 
+            Write-Verbose "Root Group $Parent does not exist"
             return
         }
         
@@ -802,19 +814,19 @@ Function Add-SWGroup {
             "Core",
 
             # refresh frequency
-            60,
+            $RefreshFrequency,
 
             # Status rollup mode:
             # 0 = Mixed status shows warning
             # 1 = Show worst status
             # 2 = Show best status
-            0,
+            $RollupMode,
 
             # group description
-            "Sub Group created by the PowerShell script.",
+            $Description,
 
             # polling enabled/disabled = true/false (in lowercase)
-            "true",
+            $Pulling,
 
             # group members
             ([xml]@(
@@ -833,7 +845,7 @@ Function Add-SWGroup {
 
         Invoke-SwisVerb $swis "Orion.Container" "AddDefinition" @(
 	        # group ID
-	        $rootgroupId,
+	        $ParentId,
 
 	        # group member to add
 	        ([xml]"
@@ -846,7 +858,7 @@ Function Add-SWGroup {
      }
      else {
 
-        $RootGroupId=(Get-SWgroup|Where-Object {$_.Name -eq "$Group"}).ContainerID
+        $ParentId=(Get-SWgroup|Where-Object {$_.Name -eq "$Group"}).ContainerID
 
         if ($GroupId) { 
             Write-Verbose "Not adding Group. Group $Group already exist"
@@ -859,16 +871,16 @@ Function Add-SWGroup {
         # owner, must be 'Core'    
         "Core",    
         # refresh frequency    
-        60,    
+        $RefreshFrequency,    
         # Status rollup mode:    
         # 0 = Mixed status shows warning    
         # 1 = Show worst status    
         # 2 = Show best status    
-        0,    
+        $RollupMode,    
         # group description    
-        "Group created by the PowerShell sample script.",    
+        $Description,    
         # polling enabled/disabled = true/false (in lowercase)    
-        "true",    
+        $Pulling,    
         # group members    
         ([xml]@(    
             "<ArrayOfMemberDefinitionInfo xmlns='http://schemas.solarwinds.com/2008/Orion'>",    
@@ -880,6 +892,4 @@ Function Add-SWGroup {
             )).DocumentElement    
         )).InnerText    
      } 
-}
-
 }
