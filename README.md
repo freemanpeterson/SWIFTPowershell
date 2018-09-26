@@ -49,6 +49,9 @@ Update-SWDNS
 Remove-SWNode
 Set-SWAppMute
 ```
+WIKI:
+https://github.com/freemanpeterson/SWIFTPowershell/wiki/SWIFTPowershell---Powershell-module-for-SolarWinds-WIKI
+
 How to get examples and description of each cmdlet:
 ```
 Get-Help Set-SWDNS -Examples
@@ -64,4 +67,5 @@ Support:
 If you have a question mail with subject "SWIFTPowershell Question"
 ```
 Legal:
-+ This module is not part of SWIFT™ or SolarWinds™
++ This module is not part of SWIFTâ„¢ or SolarWindsâ„¢
+
