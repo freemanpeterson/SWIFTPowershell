@@ -55,7 +55,7 @@ Remove-SWNode
 Set-SWAppMute
 ```
 Check out WIKI for examples:
-https://github.com/freemanpeterson/SWIFTPowershell/wiki/SWIFTPowershell---Powershell-module-for-SolarWinds-WIKI
+https://github.com/freemanpeterson/SWIFTPowershell/wiki
 
 How to get examples and description of each cmdlet:
 ```
