@@ -471,12 +471,12 @@ function Get-SWNodeDNSNotFQDN {
 
 #
 #.SYNOPSIS
-# Send-MailPSObject
+# Send-SWMailPSObject
 #
 #.EXAMPLE
-# Send-MailPSObject -PSObject (Get-Process) -FileType csv -Subject "Powershell Object in a Email" -Body "See attachment"
+# Send-SWMailPSObject -PSObject (Get-Process) -FileType csv -Subject "Powershell Object in a Email" -Body "See attachment"
 #
-function Send-MailPSObject {
+function Send-SWMailPSObject {
     Param (
         [Parameter(Mandatory=$True)]
         [PSObject]$PSObject,
