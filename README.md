@@ -11,6 +11,7 @@ Prerequisites:
 + Install SWISPowerShell (https://www.powershellgallery.com/packages/SwisPowerShell/2.3.0.108)
 + This module depends on you setting FQDN (Example: Computer.Domain.Com) for each node. 
   - You may use Set-SWDNSList -File /tmp/dns.txt  to make your environment complaint. 
++ This module requires network credentials and they must match computer and solarwinds.
 
 Install SWIFTPowershell:
 ```
