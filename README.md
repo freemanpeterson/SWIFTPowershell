@@ -35,9 +35,9 @@ Get-SWNodeCustomProperties
 Get-SWNodeDNSNotFQDN
 Get-SWNodeDuplicate
 Get-SWNodeMuteSchedule
-Get-SWProblemNode
+Get-SWNodeProblem
 Get-SWVar
-Send-MailPSObject
+Send-SWMailPSObject
 Set-SWDNS
 Set-SWDNSList
 Set-SWGroupMute

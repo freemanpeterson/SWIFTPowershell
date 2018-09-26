@@ -373,7 +373,7 @@ Function Test-SWNode {
      Write-Information ("The name of this function is: {0} " -f $MyInvocation.MyCommand) 
 
     $NodeId=(Get-SWNode|Where-Object {$_.DNS -eq $ComputerName}).NodeID
-    $Problem=Get-SWProblemNode|Where-Object {$_.NodeID -eq $NodeId}|Where-Object {$_.StatusDescription -like "down" -or "unknown"  }
+    $Problem=Get-SWNodeProblem|Where-Object {$_.NodeID -eq $NodeId}|Where-Object {$_.StatusDescription -like "down" -or "unknown"  }
 
     if($Problem){
         $Body=$Problem
@@ -395,9 +395,9 @@ Function Test-SWNode {
 # Gets current SolarWinds nodes that have a problem.
 #
 #.EXAMPLE
-# Get-SWProblemNode
+# Get-SWNodeProblem
 #
-function Get-SWProblemNode {
+function Get-SWNodeProblem {
     Write-Information ("The name of this function is: {0} " -f $MyInvocation.MyCommand) 
     Get-SwisData $swis 'SELECT NodeID, Caption, StatusDescription, ResponseTime, PercentLoss FROM Orion.Nodes WHERE statusdescription not like @s' @{ s = 'Node status is Up.'}
 }
