@@ -21,6 +21,11 @@ copy config.json.sample config.json
 # Edit as needed
 ise config.json 
 ````
+Update SWIFTPowershell:
+```
+cd "c:\Program Files\WindowsPowershell\Modules\SWIFTPowershell"
+git pull
+````
 Cmdlets Included:
 ```
 Add-SWNodeWin
