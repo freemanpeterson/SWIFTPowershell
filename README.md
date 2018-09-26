@@ -49,7 +49,7 @@ Update-SWDNS
 Remove-SWNode
 Set-SWAppMute
 ```
-WIKI:
+Check out WIKI for examples:
 https://github.com/freemanpeterson/SWIFTPowershell/wiki/SWIFTPowershell---Powershell-module-for-SolarWinds-WIKI
 
 How to get examples and description of each cmdlet:
