@@ -188,7 +188,7 @@ Function Remove-SWNode {
 
 #
 #.SYNOPSIS
-# Gets SolarWinds groups.
+# Gets SolarWinds Groups.
 #
 #.EXAMPLE
 # Get-SWGroup
@@ -198,8 +198,28 @@ function Get-SWGroup {
     Get-SwisData -SwisConnection $swis -Query 'SELECT ContainerID,Name,URI FROM Orion.Container' 
 } 
 
+
+#
 #.SYNOPSIS
-# Addes a Windows Node to SolarWinds, waits for pulling to complete and then tests the node for errors.
+# Removes SolarWinds Groups.
+#
+#.EXAMPLE
+# Remove-SWGroup -Group mygroup
+#
+Function Remove-SWGroup {
+    Param (
+		[Parameter(Mandatory=$True)]
+        $Group
+    )
+	
+	$ContainerID=(get-swgroup|where-object {$_.Name -eq $Group}).ContainerID
+	#Delete Container by Number
+	Invoke-SwisVerb $swis Orion.Container DeleteContainer  $ContainerID 
+}
+
+
+#.SYNOPSIS
+# Addes a Windows Node to SolarWinds, waits for polling to complete and then tests the node for errors.
 #
 #.EXAMPLE
 # Add-SWWinNode
@@ -208,6 +228,7 @@ Function Add-SWWinNode {
     Param (
         [Parameter(Mandatory=$True)]
         $ComputerName,
+        $InitalPollDelay ="360",  #Allow enough time to poll before reporting an issue.
         $credentialName=$DefaultcredentialName # Enter here the name under which the WMI credentials are stored. You can find it in the "Manage Windows Credentials" section of the Orion website (Settings)
     )
      Write-Information ("The name of this function is: {0} " -f $MyInvocation.MyCommand) 
@@ -215,7 +236,7 @@ Function Add-SWWinNode {
     $ShortName=$ComputerName.Split('.')[0]
     Write-Information ("ShortName: " +  $ShortName)
 
-    $InitalPollDelay ="360" #Allow enough time to poll before reporting an issue.
+    
                       
 
      if ($AllowDuplicates -eq $False) {
@@ -321,14 +342,15 @@ Function Add-SWWinNode {
     }
 }
 
+
 #
 #.SYNOPSIS
-# Addes a puller for a node to SolarWinds
+# Addes a poller for a node to SolarWinds
 #
 #.EXAMPLE
 #None
 #
-function Add-SWPoller{
+function Add-SWPoller {
     Params(
         $PollerType
         ) 
@@ -338,7 +360,7 @@ function Add-SWPoller{
 
 #
 #.SYNOPSIS
-# Addes a node to SolarWinds, change custom properties, waits for pulling to complete and Then tests the node for errors.
+# Addes a node to SolarWinds, change custom properties, waits for polling to complete and Then tests the node for errors.
 #
 #.EXAMPLE
 # Test-SWNode -ComputerName computer.domain.com
@@ -398,7 +420,7 @@ function Get-SWNodeCustomProperties {
 
 
     foreach ($NodeID in $NodeIDS) { 
-        $HashTable=Get-SwisObject $swis -Uri "swis://localhost/Orion/Orion.Nodes/NodeID=$NodeID/CustomProperties"
+        $HashTable=Get-SwisObject $swis -Uri "swis://$HostName/Orion/Orion.Nodes/NodeID=$NodeID/CustomProperties"
         #Convert to Powershell Object
         new-object psobject -Property $HashTable
     }
@@ -426,7 +448,7 @@ function Set-SWNodeCustomProperty {
    
     $NodeIds=(Get-SWNode|Where-Object {$_.DNS -eq $ComputerName}).NodeID
     foreach ($NodeID in $NodeIDS) {
-        $NodeUri="swis://localhost/Orion/Orion.Nodes/NodeID=$NodeID"
+        $NodeUri="swis://$HostName/Orion/Orion.Nodes/NodeID=$NodeID"
 
         # set the custom property
         Set-SwisObject $swis -Uri  ($NodeUri + '/CustomProperties') -Properties $CustomProperties
@@ -449,7 +471,7 @@ function Get-SWNodeDNSNotFQDN {
 
 #
 #.SYNOPSIS
-# Sets the custom property for a SolarWinds node.
+# Send-MailPSObject
 #
 #.EXAMPLE
 # Send-MailPSObject -PSObject (Get-Process) -FileType csv -Subject "Powershell Object in a Email" -Body "See attachment"
@@ -513,7 +535,7 @@ function Set-SWDNS {
 
     $NodeIds=(Get-SWNode|Where-Object {$_.Caption -eq $ShortName}).NodeID
         foreach ($NodeID in $NodeIDS) {
-            $NodeUri="swis://localhost/Orion/Orion.Nodes/NodeID=$NodeID"
+            $NodeUri="swis://$HostName/Orion/Orion.Nodes/NodeID=$NodeID"
             # set the custom property
             Set-SwisObject $swis -Uri ($NodeUri) -Properties $newNodeProps
         }
@@ -543,14 +565,14 @@ function Update-SWDNS {
     $NodeIds=(Get-SWNode|Where-Object {$_.DNS -eq $ComputerName}).NodeID
     "NodeIds: " + $NodeIds
      foreach ($NodeID in $NodeIDS) {
-        $NodeUri="swis://localhost/Orion/Orion.Nodes/NodeID=$NodeID"
+        $NodeUri="swis://$HostName/Orion/Orion.Nodes/NodeID=$NodeID"
         # set the custom property
         Set-SwisObject $swis -Uri ($NodeUri) -Properties $newNodeProps
      }
 }
 
 #.SYNOPSIS
-# Sets the DNS name it uses the shortname as the caption for a list of systems
+# Sets the DNS name. It uses the shortname as the caption for a list of systems
 #.EXAMPLE
 # Set-SWDNSList -File "/tmp/dns.txt"
 #
@@ -568,7 +590,7 @@ function Set-SWDNSList {
 }
 
 #.SYNOPSIS
-# Set Mute status on template 
+# Set mute status on template 
 #.EXAMPLE
 # Set-SWAppMute -App mytemplate -minutes 10
 #
@@ -586,7 +608,7 @@ Function Set-SWAppMute {
 
 #
 #.SYNOPSIS
-# Set Group Mute status #
+# Set group mute status 
 #.EXAMPLE
 # Set-SWGroupMute -Group MyTestGroup
 #.EXAMPLE
@@ -620,7 +642,7 @@ function Set-SWGroupMute {
 
 #
 #.SYNOPSIS
-# Get Group Mute status #
+# Get group mute status 
 #.EXAMPLE
 # Get-SWGroupMute -Group MyTestGroup
 #
@@ -736,7 +758,7 @@ $Password = $Credentials.GetNetworkCredential().Password
 
 #
 #.SYNOPSIS
-# GetNode Mute Schedule
+# Get Node Mute Schedule
 #
 #.EXAMPLE
 # Get-SWNodeMuteSchedule -ComputerName computer.example.com
@@ -763,24 +785,25 @@ $Password = $Credentials.GetNetworkCredential().Password
          "Schedule: " + $StartTime + "-" + $EndTime
     
     }
+}
 
 
 #
 #.SYNOPSIS
 #Adds SolarWinds Group 
 #Option: 
-#RollupMode 
+# RollupMode 
 #        0 = Mixed status shows warning
 #        1 = Show worst status
 #        2 = Show best status
-#RefreshFrequency
+# RefreshFrequency
 #        - Needs to be set greater then 60 or it will default to 60.      
 #.EXAMPLE
 # Add-SWGroup -Group mygroup 
 #.EXAMPLE
 # Add-SWGroup -Group mygroup2 -Parent mygroup
 #.EXAMPLE
-# Add-SWGroup -Group mygroup2 -Parent mygroup -RefreshFrequency 60 -RollupMode 0 -Description "My second group" -Pulling true
+# Add-SWGroup -Group mygroup2 -Parent mygroup -RefreshFrequency 60 -RollupMode 0 -Description "My second group" -Polling true
 Function Add-SWGroup {
     Param(
         [Parameter(Mandatory=$True)]
@@ -789,68 +812,70 @@ Function Add-SWGroup {
         [int]$RefreshFrequency=60,
         [int]$RollupMode=0,
         [string]$Description="Group created by the PowerShell script.",
-        [string]$Pulling="true",
+        [string]$Polling="true",
         $GroupMembers=@()
     )
+    Write-Information ("The name of this function is: {0} " -f $MyInvocation.MyCommand) 
     
     if ($Parent) {
-        Write-Information ("The name of this function is: {0} " -f $MyInvocation.MyCommand) 
-    
-    
+        
         $ParentId=(Get-SWgroup|Where-Object {$_.Name -eq "$Parent"}).ContainerID
 
         if (-Not ($ParentId)) { 
-            Write-Verbose "Root Group $Parent does not exist"
+            Write-Verbose "Parent Group $Parent does not exist"
             return
         }
+    }
         
-        #
-        # ADDING A GROUP
-        #
-        # Adding up devices in the group.
-        #  
-        $GroupId=(Get-SWgroup|Where-Object {$_.Name -eq "$Group"}).ContainerID
+    #
+    # ADDING A GROUP
+    #
+    # Adding up devices in the group.
+    #  
+    $GroupId=(Get-SWgroup|Where-Object {$_.Name -eq "$Group"}).ContainerID
 
-        if ($GroupId) { 
-            Write-Verbose "Not adding Group. Group $Group already exist"
-            return
-        }
-        Write-Verbose  ("Creating Group $Group")
+    if ($GroupId) { 
+         Write-Verbose "Not adding Group. Group $Group already exist"
+         return
+    }
+    
+    Write-Verbose  ("Creating Group $Group")
 
-            $groupId = (Invoke-SwisVerb $swis "Orion.Container" "CreateContainer" @(
-            # Group name 
-            "$Group",
+    $groupId = (Invoke-SwisVerb $swis "Orion.Container" "CreateContainer" @(
+    # Group name 
+    "$Group",
 
-            # owner, must be 'Core'
-            "Core",
+    # owner, must be 'Core'
+    "Core",
 
-            # refresh frequency
-            $RefreshFrequency,
+    # refresh frequency
+    $RefreshFrequency,
 
-            # Status rollup mode:
-            # 0 = Mixed status shows warning
-            # 1 = Show worst status
-            # 2 = Show best status
-            $RollupMode,
+    # Status rollup mode:
+    # 0 = Mixed status shows warning
+    # 1 = Show worst status
+    # 2 = Show best status
+    $RollupMode,
 
-            # group description
-            $Description,
+    # group description
+    $Description,
 
-            # polling enabled/disabled = true/false (in lowercase)
-            $Pulling,
+    # polling enabled/disabled = true/false (in lowercase)
+    $Polling,
 
-            # group members
-            ([xml]@(
-                "<ArrayOfMemberDefinitionInfo xmlns='http://schemas.solarwinds.com/2008/Orion'>",
-                [string]($groupmembers |% {
-                "<MemberDefinitionInfo><Name>$($_.Name)</Name><Definition>$($_.Definition)</Definition></MemberDefinitionInfo>"
-                }
-            ),
-            "</ArrayOfMemberDefinitionInfo>"
-            )).DocumentElement
-        )).InnerText 
+    # group members
+    ([xml]@(
+        "<ArrayOfMemberDefinitionInfo xmlns='http://schemas.solarwinds.com/2008/Orion'>",
+        [string]($GroupMembers |% {
+        "<MemberDefinitionInfo><Name>$($_.Name)</Name><Definition>$($_.Definition)</Definition></MemberDefinitionInfo>"
+       }
+    ),
+    "</ArrayOfMemberDefinitionInfo>"
+    )).DocumentElement
+    )).InnerText 
 
-     # Add the SubGroup to a group
+    if ($Parent) {
+         # Add the Group to a Parent Group
 
         $groupUri = Get-SwisData $swis "SELECT Uri FROM Orion.Container WHERE ContainerID=@id" @{ id = $groupId }
 
@@ -862,45 +887,9 @@ Function Add-SWGroup {
 	        ([xml]"
 		        <MemberDefinitionInfo xmlns='http://schemas.solarwinds.com/2008/Orion'>
 		            <Name></Name>
-		            <Definition>$groupUri</Definition>
+		            <Definition>$GroupUri</Definition>
 	            </MemberDefinitionInfo>"
  	        ).DocumentElement
         ) | Out-Null
      }
-     else {
-
-        $ParentId=(Get-SWgroup|Where-Object {$_.Name -eq "$Group"}).ContainerID
-
-        if ($GroupId) { 
-            Write-Verbose "Not adding Group. Group $Group already exist"
-            return
-        }
-        Write-Verbose  ("Creating Group $Group")
-        $groupId = (Invoke-SwisVerb $swis "Orion.Container" "CreateContainer" @(    
-        # group name    
-        "$Group",    
-        # owner, must be 'Core'    
-        "Core",    
-        # refresh frequency    
-        $RefreshFrequency,    
-        # Status rollup mode:    
-        # 0 = Mixed status shows warning    
-        # 1 = Show worst status    
-        # 2 = Show best status    
-        $RollupMode,    
-        # group description    
-        $Description,    
-        # polling enabled/disabled = true/false (in lowercase)    
-        $Pulling,    
-        # group members    
-        ([xml]@(    
-            "<ArrayOfMemberDefinitionInfo xmlns='http://schemas.solarwinds.com/2008/Orion'>",    
-            [string]($groupmembers |% {    
-            "<MemberDefinitionInfo><Name>$($_.Name)</Name><Definition>$($_.Definition)</Definition></MemberDefinitionInfo>"    
-            }    
-        ),    
-        "</ArrayOfMemberDefinitionInfo>"    
-            )).DocumentElement    
-        )).InnerText    
-     } 
 }
