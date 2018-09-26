@@ -222,13 +222,14 @@ Function Remove-SWGroup {
 # Addes a Windows Node to SolarWinds, waits for polling to complete and then tests the node for errors.
 #
 #.EXAMPLE
-# Add-SWWinNode
+# Add-SWNodeWin
 #
-Function Add-SWWinNode {
+Function Add-SWNodeWin {
     Param (
         [Parameter(Mandatory=$True)]
-        $ComputerName,
-        $InitalPollDelay ="360",  #Allow enough time to poll before reporting an issue.
+        [String]$ComputerName,
+        [Int] $InitalPollDelay ="360",  #Allow enough time to poll before reporting an issue.
+        [Bool]$Test=$True,
         $credentialName=$DefaultcredentialName # Enter here the name under which the WMI credentials are stored. You can find it in the "Manage Windows Credentials" section of the Orion website (Settings)
     )
      Write-Information ("The name of this function is: {0} " -f $MyInvocation.MyCommand) 
@@ -331,31 +332,16 @@ Function Add-SWWinNode {
     $poller["PollerType"]="N.Memory.WMI.Windows";
     $pollerUri = New-SwisObject $swis -EntityType "Orion.Pollers" -Properties $poller 
     #endregion Add Pollers for Status (Up/Down), Response Time, Details, Uptime, CPU, & Memory
-    
-    Write-Verbose  ("Waiting for poll to complete..." )
-    Start-Sleep -Seconds $InitalPollDelay
+    if ($Test) {
+        Write-Verbose  ("Waiting for poll to complete..." )
+        Start-Sleep -Seconds $InitalPollDelay
 
-    $Problem=Test-SWNode -ComputerName $ComputerName
+        $Problem=Test-SWNode -ComputerName $ComputerName
      
-    if ($Problem) {
-        Throw "Problem with $ComputerName nodeID:  " + $nodeProps["NodeID"]
+        if ($Problem) {
+            Throw "Problem with $ComputerName nodeID:  " + $nodeProps["NodeID"]
+        }
     }
-}
-
-
-#
-#.SYNOPSIS
-# Addes a poller for a node to SolarWinds
-#
-#.EXAMPLE
-#None
-#
-function Add-SWPoller {
-    Params(
-        $PollerType
-        ) 
-    $poller["PollerType"] = $PollerType
-    $pollerUri = New-SwisObject $swis -EntityType "Orion.Pollers" -Properties $poller
 }
 
 #
