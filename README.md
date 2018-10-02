@@ -4,8 +4,6 @@
 #### 
 
 SWISPowershell is a good module and resource frendly. However, sometimes it just not as easy as running a simple cmdlet. This module is designed to make system administration easier. 
-I plan to add in functionality as time goes on.
-
 Prerequisites:
 + Install git (https://git-scm.com/download/win)
 + Install SWISPowerShell (https://www.powershellgallery.com/packages/SwisPowerShell/2.3.0.108)
