@@ -29,31 +29,31 @@ git pull
 ````
 Cmdlets Included:
 ```
-Add-SWNodeWin
-Add-SWGroup
-Add-SWPoller
-Get-SWApp
-Get-SWGroup
-Remove-SWGroup
-Get-SWGroupMute
-Get-SWNode
-Get-SWNodeCustomProperties
-Get-SWNodeDNSNotFQDN
-Get-SWNodeDuplicate
-Get-SWNodeMuteSchedule
-Get-SWNodeProblem
-Get-SWVar
-Send-SWMailPSObject
-Set-SWDNS
-Set-SWDNSList
-Set-SWGroupMute
-Set-SWGroupMuteSchedule
-Set-SWNodeCustomProperty
-Set-SWPassword
-Test-SWNode
-Update-SWDNS
-Remove-SWNode
-Set-SWAppMute
+Add-SWNodeWin                - Add a windows WMI solarwinds node
+Add-SWGroup                  - Add a SolarWinds Group
+Add-SWPoller                 - Add a SolarWinds Poller
+Get-SWApp -                  - Get a List of SolarWinds Application Templates
+Get-SWGroup                  - Get SolarWinds Groups
+Remove-SWGroup               - Remove a Solarwinds Group
+Get-SWGroupMute              - Mute a SolarWinds Group
+Get-SWNode                   - Get a list of SW Nodes
+Get-SWNodeCustomProperties  - Get SolarWinds Node Custom Properties
+Get-SWNodeDNSNotFQDN        - Get SolarWinds Node that have a full qualified DNS Name
+Get-SWNodeDuplicate         - Get SolarWinds node caption names that are not unique
+Get-SWNodeMuteSchedule      - Get SolarWinds Node Mute Schedule
+Get-SWNodeProblem           - Get SolarWind Nodes that have Problems
+Get-SWVar                   - Get SWIFTPowershell Script Variables
+Send-SWMailPSObject         - Send a Powershell Object via Email in csv or html format
+Set-SWDNS                   - Set SW Node DNS NAME
+Set-SWDNSList               - Sets a list of SolarWind Nodes to dns name
+Set-SWGroupMute             - Set SolarWinds Group to Mute
+Set-SWGroupMuteSchedule     - Set SolarWinds Group to Mute on Schedule
+Set-SWNodeCustomProperty    - Set SolarWinds Node Custom Property
+Set-SWPassword              - Set SWIFTPowershell Password
+Test-SWNode                 - Test SolarWinds Node
+Update-SWDNS                - Update SolarWinds node DNS
+Remove-SWNode               - Remove SolarWinds node DNS
+Set-SWAppMute               - Set Solarwinds Application Template to Mute
 ```
 Check out WIKI for examples:
 https://github.com/freemanpeterson/SWIFTPowershell/wiki
