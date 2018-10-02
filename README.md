@@ -39,7 +39,7 @@ Get-SWNodeCustomProperties  - Get SolarWinds node custom properties.
 Get-SWNodeDNSNotFQDN        - Get SolarWinds node that have a full qualified DNS name.
 Get-SWNodeDuplicate         - Get SolarWinds node caption names that are not unique.
 Get-SWNodeMuteSchedule      - Get SolarWinds node mute schedule.
-Get-SWNodeProblem           - Get SolarWind nodes that have problems.
+Get-SWNodeProblem           - Get SolarWinds nodes that have problems.
 Get-SWVar                   - Get SWIFTPowershell script variables.
 Send-SWMailPSObject         - Send a Powershell object via email in csv or html format.
 Set-SWDNS                   - Set SolarWinds node DNS name.
