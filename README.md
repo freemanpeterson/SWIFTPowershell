@@ -43,14 +43,14 @@ Get-SWNodeProblem           - Get SolarWinds nodes that have problems.
 Get-SWVar                   - Get SWIFTPowershell script variables.
 Send-SWMailPSObject         - Send a Powershell object via email in csv or html format.
 Set-SWDNS                   - Set SolarWinds node DNS name.
-Set-SWDNSList               - Sets a list of SolarWind nodes to DNS name.
+Set-SWDNSList               - Sets a list of SolarWinds nodes to DNS name.
 Set-SWGroupMute             - Set SolarWinds group to mute.
 Set-SWGroupMuteSchedule     - Set SolarWinds group to mute on schedule.
 Set-SWNodeCustomProperty    - Set SolarWinds node custom property.
 Set-SWPassword              - Set SWIFTPowershell password.
 Test-SWNode                 - Test SolarWinds node.
 Update-SWDNS                - Update SolarWinds node DNS by caption name.
-Remove-SWNode               - Remove SolarWinds node DNS.
+Remove-SWNode               - Remove SolarWinds node by DNS nam.
 Set-SWAppMute               - Set Solarwinds application template to mute
 ```
 Check out WIKI for examples:
