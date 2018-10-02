@@ -1,6 +1,6 @@
 
 # SWIFTPowershell
-### Written by:         Freeman Peterson fjpeterson@nd.gov
+### Written by:         Freeman Peterson freemanpeterson@gmail.com
 #### 
 
 SWISPowershell is a good module and resource frendly. However, sometimes it just not as easy as running a simple cmdlet. This module is designed to make system administration easier. 
