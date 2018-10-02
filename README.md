@@ -34,7 +34,7 @@ Get-SWApp                   - Get a list of SolarWinds application templates.
 Get-SWGroup                 - Get SolarWinds groups.
 Remove-SWGroup              - Remove a Solarwinds group.
 Get-SWGroupMute             - Mute a SolarWinds group.
-Get-SWNode                  - Get a list of SolarWinds Nodes.
+Get-SWNode                  - Get a list of SolarWinds nodes.
 Get-SWNodeCustomProperties  - Get SolarWinds node custom properties.
 Get-SWNodeDNSNotFQDN        - Get SolarWinds node that have a full qualified DNS name.
 Get-SWNodeDuplicate         - Get SolarWinds node caption names that are not unique.
