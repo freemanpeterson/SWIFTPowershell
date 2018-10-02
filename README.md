@@ -27,14 +27,14 @@ git pull
 ````
 Cmdlets Included:
 ```
-Add-SWNodeWin                - Add a Windows WMI SolarWinds node.
-Add-SWGroup                  - Add a SolarWinds group.
-Add-SWPoller                 - Add a SolarWinds poller.
-Get-SWApp -                  - Get a list of SolarWinds application templates.
-Get-SWGroup                  - Get SolarWinds groups.
-Remove-SWGroup               - Remove a Solarwinds group.
-Get-SWGroupMute              - Mute a SolarWinds group.
-Get-SWNode                   - Get a list of SolarWinds Nodes.
+Add-SWNodeWin               - Add a Windows WMI SolarWinds node.
+Add-SWGroup                 - Add a SolarWinds group.
+Add-SWPoller                - Add a SolarWinds poller.
+Get-SWApp                   - Get a list of SolarWinds application templates.
+Get-SWGroup                 - Get SolarWinds groups.
+Remove-SWGroup              - Remove a Solarwinds group.
+Get-SWGroupMute             - Mute a SolarWinds group.
+Get-SWNode                  - Get a list of SolarWinds Nodes.
 Get-SWNodeCustomProperties  - Get SolarWinds node custom properties.
 Get-SWNodeDNSNotFQDN        - Get SolarWinds node that have a full qualified DNS name.
 Get-SWNodeDuplicate         - Get SolarWinds node caption names that are not unique.
