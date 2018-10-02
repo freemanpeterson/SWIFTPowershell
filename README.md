@@ -29,7 +29,7 @@ git pull
 ````
 Cmdlets Included:
 ```
-Add-SWNodeWin                - Add a windows WMI solarwinds node
+Add-SWNodeWin                - Add a windows WMI SolarWinds node
 Add-SWGroup                  - Add a SolarWinds Group
 Add-SWPoller                 - Add a SolarWinds Poller
 Get-SWApp -                  - Get a List of SolarWinds Application Templates
